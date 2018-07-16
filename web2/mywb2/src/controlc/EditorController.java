@@ -80,6 +80,7 @@ public class EditorController extends HttpServlet {
 			session1.setAttribute("td",stc);
 			forward= EdtPage + "?redir=false";
 		}
+		session1.removeAttribute("redir");
 		RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
 		dispatcher.forward(request, response);
 
