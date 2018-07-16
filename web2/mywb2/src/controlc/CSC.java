@@ -55,6 +55,7 @@ public class CSC extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Map<String, Serializable> ti = new HashMap<String, Serializable>();
+		ti.put("myind", 2);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		String action = request.getParameter("myaction");
 		String forward = "";
@@ -65,7 +66,7 @@ public class CSC extends HttpServlet {
 
 			if (tr.size() > 0) {
 				ti.put("ind", tr.get(0).getIdtraveler());
-				ti.put("tr", tr.get(0));
+				ti.put("tr", tr.get(0).getTravelerName());
 			}
 			request.setAttribute("ti", ti);
 			forward = CP;
@@ -140,7 +141,7 @@ public class CSC extends HttpServlet {
 				int di = TBL.addTraveller(nm, sqld);
 				// request.setAttribute("ti", di);
 				ti.put("ind", di);
-				ti.put("tr", TBL.getTravelerbyId(di + ""));
+				ti.put("tr", TBL.getTravelerbyId(di + "").getTravelerName());
 				setuser = true;
 				session1.removeAttribute("ti");
 				session1.setAttribute("ti", ti);
@@ -184,7 +185,7 @@ public class CSC extends HttpServlet {
 
 			Traveler t = TBL.getTravelerbyId(request.getParameter("traveller"));
 			ti.put("ind", t.getIdtraveler());
-			ti.put("tr", t);
+			ti.put("tr", t.getTravelerName());
 			session1.setAttribute("ti", ti);
 			setuser = true;
 		} else if ("rmvusr".equals(act)) {
@@ -196,7 +197,7 @@ public class CSC extends HttpServlet {
 		if (!(tr == null) & !setuser) {
 			session1.removeAttribute("ti");
 			ti.put("ind", tr.get(0).getIdtraveler());
-			ti.put("tr", tr.get(0));
+			ti.put("tr", tr.get(0).getTravelerName());
 			session1.setAttribute("ti", ti);
 		}
 		if("newcity".equals(act)) {

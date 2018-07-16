@@ -79,7 +79,7 @@
 			<div class="col-sm-4">
 			<form action="CSC" method="post"><%-- "${ti.ind ne 1 ? ti.ind : '' }" --%>
 				<label for="removetrvl">remove</label> <input type="hidden" id="removetrvl" name="userid" value=   "${ti.ind ne 1 ? ti.ind : '' }"   >
-				<h3><c:if test="${ti.ind eq 1}">can't remove </c:if>${ti.tr}</h3><c:if test="${ti.ind ne 1}">
+				<h3><c:if test="${ti.myind == ti.ind}">can't remove </c:if>${ti.tr}</h3><c:if test="${ti.myind != ti.ind}">
 				<button class="btn btn btn-warning btn-lg" name="action" type="submit" value="rmvusr">remove</button></c:if>
 				</form>
 			</div>
