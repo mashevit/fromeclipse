@@ -127,6 +127,7 @@ public class CSC extends HttpServlet {
 
 		List<Traveler> tr = null;
 		Map<String, Serializable> ti = new HashMap<String, Serializable>();
+		ti.put("myind", 2);
 		boolean setuser = request.getAttribute("ti") != null;
 
 		String init = request.getParameter("init");
