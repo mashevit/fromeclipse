@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -206,7 +207,11 @@ public class CSC extends HttpServlet {
 		}
 		if("redir".equals(act)) {
 			session1.setAttribute("ti", null);
-			forward="tripEditor.jsp?redir=true";
+			session1.setAttribute("redir", "true");
+			ServletContext context= getServletContext();
+			RequestDispatcher rd= context.getRequestDispatcher("/EditorController");
+			rd.forward(request, response);
+			//response.sendRedirect(request.getContextPath() + "/EditorController");
 		}
 		request.setAttribute("user", tr);
 		List<City> lc = TBL.get3common();

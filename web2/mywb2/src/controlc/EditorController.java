@@ -56,7 +56,8 @@ public class EditorController extends HttpServlet {
 		String init = request.getParameter("init");
 		HttpSession session1 = request.getSession();
 		int tri = 0;
-		if ("listOftrips".equalsIgnoreCase(action)) {
+		String redir=(String) request.getAttribute("redir");
+		if ("listOftrips".equalsIgnoreCase(action)||"true".equals(redir)) {
 			List<Trip> tr = TBL.Tripl();
 			session1.setAttribute("trips", tr);
 			if (!(tr == null)) {
@@ -65,7 +66,7 @@ public class EditorController extends HttpServlet {
 			session1.setAttribute("tri", tri);
 			forward = EdtPage;
 		}
-		if ("true".equals(init)) {
+		if ("true".equals(init)||"true".equals(redir)) {
 			// Trip t = (Trip)tri.get("tr");
 			String Tripid = tri + "";
 			City c = TBL.getCitybyTrip(Tripid);
