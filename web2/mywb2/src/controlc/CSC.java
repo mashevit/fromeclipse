@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
 
 import abc.da.Dac;
 import abc.da.ICSC;
-import abc.da.IDac;
 import model3.City;
 import model3.Pic;
 import model3.Traveler;
@@ -124,7 +123,7 @@ public class CSC extends HttpServlet {
 		String bd = request.getParameter("birth_d");
 		String nm = request.getParameter("name");
 		HttpSession session1 = request.getSession();
-
+		String forward="";
 		List<Traveler> tr = null;
 		Map<String, Serializable> ti = new HashMap<String, Serializable>();
 		ti.put("myind", 2);
@@ -205,7 +204,10 @@ public class CSC extends HttpServlet {
 			String newc= request.getParameter("newcity");
 			TBL.addCity(newc);
 		}
-		
+		if("redir".equals(act)) {
+			session1.setAttribute("ti", null);
+			forward="tripEditor.jsp?redir=true";
+		}
 		request.setAttribute("user", tr);
 		List<City> lc = TBL.get3common();
 		if (lc.size() > 2) {
@@ -233,8 +235,8 @@ public class CSC extends HttpServlet {
 		request.setAttribute("lpc", lpc);	}
 		List<City> cityl = TBL.getAllCities();
 		request.setAttribute("cities", cityl);
-	
-		RequestDispatcher dispatcher = request.getRequestDispatcher(CP);
+		forward=("".equals(forward))? CP : forward;
+		RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
 		dispatcher.forward(request, response);
 
 	}

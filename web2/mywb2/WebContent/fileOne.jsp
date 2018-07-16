@@ -73,8 +73,9 @@
 			<div class="col-sm-4">
 				<h2>About This Site</h2>
 				<h4>Here are my Travels</h4>
-				<p>And More Should Come</p><a href="tripEditor.jsp?redir=true">
-				<button class="btn btn-default btn-lg" >Edit a Trip</button></a>
+				<form method="post" action="CSC">
+				<p>And More Should Come</p><!-- <input type="hidden" name="redir" value="true"><input type="hidden" name="init" value="true"><input type="hidden" name="myaction" value="listOftrips"> -->
+				<button class="btn btn-default btn-lg" type="submit" name="action" value="redir">Edit a Trip</button></form>
 			</div>
 			<div class="col-sm-4">
 			<form action="CSC" method="post"><%-- "${ti.ind ne 1 ? ti.ind : '' }" --%>
