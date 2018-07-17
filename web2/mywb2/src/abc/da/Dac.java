@@ -300,12 +300,27 @@ public class Dac implements IDac, ICSC {
 		EntityManager em = emf.createEntityManager();
 		Query query = em.createNamedQuery("Trip.findAll");
 		List<Trip> ans = query.getResultList();
-		;
 		em.close();
 		emf.close();
 
 		return ans;
 	}
+	@SuppressWarnings("unchecked")
+	public List<Trip> TriplOAsc() {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+		EntityManager em = emf.createEntityManager();
+		Query query = em.createQuery("SELECT t FROM Trip t ORDER BY t.tripDate ASC");
+		List<Trip> ans = query.getResultList();
+		em.close();
+		emf.close();
+
+		return ans;
+	}
+	
+	
+	
+	
+	
 
 	public String getTripCityName(String idt) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");

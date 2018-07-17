@@ -209,8 +209,9 @@ public class CSC extends HttpServlet {
 			session1.setAttribute("ti", null);
 			session1.setAttribute("redir", "true");
 			ServletContext context= getServletContext();
-			RequestDispatcher rd= context.getRequestDispatcher("/EditorController");
-			rd.forward(request, response);
+			forward="/EditorController";
+		//	RequestDispatcher rd= context.getRequestDispatcher("/EditorController");
+		//	rd.forward(request, response);
 			//response.sendRedirect(request.getContextPath() + "/EditorController");
 		}
 		request.setAttribute("user", tr);
@@ -241,7 +242,7 @@ public class CSC extends HttpServlet {
 		List<City> cityl = TBL.getAllCities();
 		request.setAttribute("cities", cityl);
 		forward=("".equals(forward))? CP : forward;
-		RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(/*request.getContextPath() +*/forward);
 		dispatcher.forward(request, response);
 
 	}

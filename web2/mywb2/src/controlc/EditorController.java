@@ -58,7 +58,7 @@ public class EditorController extends HttpServlet {
 		int tri = 0;
 		String redir=(String) request.getAttribute("redir");
 		if ("listOftrips".equalsIgnoreCase(action)||"true".equals(redir)) {
-			List<Trip> tr = TBL.Tripl();
+			List<Trip> tr = TBL.TriplOAsc();
 			session1.setAttribute("trips", tr);
 			if (!(tr == null)) {
 				tri = tr.get(tr.size() - 1).getIdtrip();
@@ -239,7 +239,7 @@ public class EditorController extends HttpServlet {
 				session1.setAttribute(tri, a);
 			} else {
 				int trib = 0;
-				List<Trip> tr = TBL.Tripl();
+				List<Trip> tr = TBL.TriplOAsc();
 				session1.setAttribute("trips", tr);
 				if (!(tr == null)) {
 					trib = tr.get(tr.size() - 1).getIdtrip();

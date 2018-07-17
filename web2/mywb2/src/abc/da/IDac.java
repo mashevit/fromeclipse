@@ -90,4 +90,6 @@ public interface IDac {
 	int createTrip(String cityi, Date date, String traveleri, int numdays, int moneyspent, String hotel, String Sightseeingi,
 			int transit);
 
+	List<Trip> TriplOAsc();
+
 }
