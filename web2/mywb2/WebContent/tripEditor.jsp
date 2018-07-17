@@ -63,7 +63,7 @@
 				<!-- <input type="text" class="form-control" size="50" placeholder="your name" required> -->
 
 				<select class="form-control" id='trvlr' name='triptoedt'>
-					<option value="-1">Select traveler</option>
+					<option value="-1">Select trip</option>
 					<c:forEach items="${trips}" var="trip">
 						<option value="${trip.idtrip}"
 							${trip.idtrip eq tri? ' selected': ''}>
