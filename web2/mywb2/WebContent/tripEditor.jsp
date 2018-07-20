@@ -4,7 +4,7 @@
 <%@page import="javax.naming.*"%>
 <%@page import="java.io.*"%>
 <%@page import="java.util.*"%>
-<%@page import="Imgg.*"%>
+<%@page import="Imgg.Stac"%>
 <%@page import="Interf.*"%>
 <%@page import="model3.TripSightseeing"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -27,7 +27,30 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="./css/FileOne.css">
+<style>
+#pics {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
 
+#pics td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#pics tr:nth-child(even){background-color: #f2f2f2;}
+
+#pics tr:hover {background-color: #ddd;}
+
+#pics th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar"
 	data-offset="60">
@@ -200,15 +223,16 @@
 														} else if (action.equals("ListItems")) {
 															Vector<Map> items = td.listItems();
 															/* 		out.println("items: "); */
+															out.println("<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>");
 															for (int x = 0; x != items.size(); x++) {
 																String addrspic = (String) items.elementAt(x).get("addr");
-																out.println("<br>" + (x + 1) + ". " + items.elementAt(x).get("trs") + ", "
-																		+ (addrspic.length() >= 6
-																				? "..." + addrspic.substring(addrspic.length() - 5)
+																out.println("<tr><td>" + (x + 1) + ".</td><td> " + items.elementAt(x).get("trs") + "</td><td> "
+																		+ (addrspic.length() >= 40
+																				? /* "..." + */ addrspic.substring(addrspic.length() - 40)
 																				: addrspic));
-																out.print("<a href=tripEditor.jsp?todo=remove&itemnum=" + x + ">remove</a>");
+																out.print("</td><td><a href=tripEditor.jsp?todo=remove&itemnum=" + x + ">remove</a></td></tr>");
 																request.setAttribute("scrollTo", "addpics");
-															}
+															}out.print("</table>");
 															request.setAttribute("scrollTo", "addpics");
 
 														} else if ("ClearList".equals(action)) {

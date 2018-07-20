@@ -1,6 +1,9 @@
 package model3;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -140,7 +143,13 @@ public class Trip implements Serializable {
 		return "trip on the "+ this.getTripDate()+" stayed in "+this.getTripHotel()+" hotel, budget was: " +this.getTripMoneyspent()+" transit time was "+ this.getTrip_numMinTransit()+" minutes";
 	}
 	public String nameCompat() {
-		return "trip on the "+this.tripDate+" to "+this.getCity().getCityName();
+	     //SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	       // Date date = dt.parse(date_s);
+
+	        // *** same for the format String below
+	        SimpleDateFormat dt1 = new SimpleDateFormat("dd-MM-yyyy");
+	        System.out.println();
+		return "trip on the "+ /* LocalDate.of( this.tripDate.getYear() , this.tripDate.getMonth() , this.tripDate.getDay() )   */   dt1.format(this.tripDate)  /*this.tripDate.getTime()*/ +" to "+this.getCity().getCityName();
 	}
 
 }
