@@ -21,7 +21,7 @@ public class Trip implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idtrip;
-
+//
 	@Temporal(TemporalType.DATE)
 	@Column(name="trip_date")
 	private Date tripDate;
