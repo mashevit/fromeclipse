@@ -15,7 +15,7 @@ import model3.Traveler;
 import model3.Trip;
 import model3.TripSightseeing;
 
-public class Dac implements IDac, ICSC {
+public class Dac implements IDac, ICSC, InvI {
 
 	// EntityManager em;
 	EntityManagerFactory emf;
@@ -43,25 +43,22 @@ public class Dac implements IDac, ICSC {
 		trip.setTripNumdays(numdays);
 		trip.setTripMoneyspent(moneyspent);
 		trip.setTrip_numMinTransit(transit);
-		
-		
-		  em.getTransaction().begin();
-	        em.persist(trip);
-	        em.getTransaction().commit();
-		//em.persist();
+
+		em.getTransaction().begin();
+		em.persist(trip);
+		em.getTransaction().commit();
+		// em.persist();
 		if (Sightseeingi != null) {
 			int i3 = Integer.parseInt(Sightseeingi);
 			Sightseeing sight = em.find(Sightseeing.class, i3);
 			TripSightseeing tsi = new TripSightseeing();
 			tsi.setSightseeing(sight);
 			tsi.setTrip(trip);
-			
-			
-			
-			  em.getTransaction().begin();
-		        em.persist(tsi);
-		        em.getTransaction().commit();
-		//	em.persist();
+
+			em.getTransaction().begin();
+			em.persist(tsi);
+			em.getTransaction().commit();
+			// em.persist();
 		}
 
 		em.close();
@@ -86,14 +83,11 @@ public class Dac implements IDac, ICSC {
 		trip.setTripNumdays(Integer.parseInt(numdays));
 		trip.setTripMoneyspent(Integer.parseInt(moneyspent));
 		trip.setTrip_numMinTransit(Integer.parseInt(transit));
-		
-		
-		
-		
-		  em.getTransaction().begin();
-	        em.persist(trip);
-	        em.getTransaction().commit();
-	//	em.persist();
+
+		em.getTransaction().begin();
+		em.persist(trip);
+		em.getTransaction().commit();
+		// em.persist();
 
 		em.close();
 		emf.close();
@@ -106,13 +100,11 @@ public class Dac implements IDac, ICSC {
 		Traveler travelr = new Traveler();
 		travelr.setTravelerName(name);
 		travelr.setTraveler_BirthDate(birthDate);
-		
-		
-		
-		  em.getTransaction().begin();
-	        em.persist(travelr);
-	        em.getTransaction().commit();
-	//	em.persist();
+
+		em.getTransaction().begin();
+		em.persist(travelr);
+		em.getTransaction().commit();
+		// em.persist();
 
 		em.close();
 		emf.close();
@@ -135,12 +127,11 @@ public class Dac implements IDac, ICSC {
 			e.printStackTrace();
 		}
 		city.setCityName(cityName);
-		
-		
-		  em.getTransaction().begin();
-	        em.persist(city);
-	        em.getTransaction().commit();
-		//em.persist(city);
+
+		em.getTransaction().begin();
+		em.persist(city);
+		em.getTransaction().commit();
+		// em.persist(city);
 
 		em.close();
 		emf.close();
@@ -153,13 +144,11 @@ public class Dac implements IDac, ICSC {
 		Sightseeing sight = new Sightseeing();
 		sight.setSightSeeingsName(name);
 		sight.setCity(city);
-		
-		
-		
-		  em.getTransaction().begin();
-	        em.persist(sight);
-	        em.getTransaction().commit();
-		//em.persist(sight);
+
+		em.getTransaction().begin();
+		em.persist(sight);
+		em.getTransaction().commit();
+		// em.persist(sight);
 
 		em.close();
 		emf.close();
@@ -172,13 +161,12 @@ public class Dac implements IDac, ICSC {
 		EntityManager em = emf.createEntityManager();
 		TripSightseeing tS = new TripSightseeing();
 		tS.setSightseeing(sightseeing);
-		
-		  em.getTransaction().begin();
-	        em.persist(tS);
-	        em.getTransaction().commit();
-		
-		
-		//em.persist(tS);
+
+		em.getTransaction().begin();
+		em.persist(tS);
+		em.getTransaction().commit();
+
+		// em.persist(tS);
 
 		em.close();
 		emf.close();
@@ -201,8 +189,9 @@ public class Dac implements IDac, ICSC {
 		EntityManager em = emf.createEntityManager();
 		int i = Integer.parseInt(ist);
 		City city = em.find(City.class, i);
+		em.getTransaction().begin();
 		em.remove(city);
-
+		em.getTransaction().commit();
 		em.close();
 		emf.close();
 		return i + "  city removed ";
@@ -227,12 +216,11 @@ public class Dac implements IDac, ICSC {
 		Traveler traveler = new Traveler();
 		traveler.setTravelerName(name);
 		traveler.setTraveler_BirthDate(BirthD);
-		
-		
-		  em.getTransaction().begin();
-	        em.persist(traveler);
-	        em.getTransaction().commit();
-		//em.persist(traveler);
+
+		em.getTransaction().begin();
+		em.persist(traveler);
+		em.getTransaction().commit();
+		// em.persist(traveler);
 		em.close();
 		emf.close();
 		return traveler.getIdtraveler();
@@ -245,13 +233,11 @@ public class Dac implements IDac, ICSC {
 		Sightseeing sight = new Sightseeing();
 		sight.setCity(city);
 		sight.setSightSeeingsName(name);
-		
-		
-		
-		  em.getTransaction().begin();
-	        em.persist(sight);
-	        em.getTransaction().commit();
-		//em.persist(sight);
+
+		em.getTransaction().begin();
+		em.persist(sight);
+		em.getTransaction().commit();
+		// em.persist(sight);
 		em.close();
 		emf.close();
 		return sight.getIdSightSeeings();
@@ -266,12 +252,11 @@ public class Dac implements IDac, ICSC {
 		City city = em.find(City.class, i);
 		sight.setCity(city);
 		sight.setSightSeeingsName(name);
-		
-		
-		  em.getTransaction().begin();
-	        em.persist(sight);
-	        em.getTransaction().commit();
-		//em.persist(sight);
+
+		em.getTransaction().begin();
+		em.persist(sight);
+		em.getTransaction().commit();
+		// em.persist(sight);
 
 		em.close();
 		emf.close();
@@ -305,6 +290,7 @@ public class Dac implements IDac, ICSC {
 
 		return ans;
 	}
+
 	@SuppressWarnings("unchecked")
 	public List<Trip> TriplOAsc() {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
@@ -316,11 +302,6 @@ public class Dac implements IDac, ICSC {
 
 		return ans;
 	}
-	
-	
-	
-	
-	
 
 	public String getTripCityName(String idt) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
@@ -390,8 +371,11 @@ public class Dac implements IDac, ICSC {
 		int is = Integer.parseInt(si);
 		Trip trip = em.find(Trip.class, id);
 		TripSightseeing trs = em.find(TripSightseeing.class, is);
+		em.getTransaction().begin();
 		trs = trip.removeTripSightseeing(trs);
+
 		em.remove(trs);
+		em.getTransaction().commit();
 		em.close();
 		emf.close();
 
@@ -407,9 +391,11 @@ public class Dac implements IDac, ICSC {
 		Trip trip = em.find(Trip.class, id);
 		TripSightseeing trs = em.find(TripSightseeing.class, is);
 		int i = trs.getSightseeing().getIdSightSeeings();
+		em.getTransaction().begin();
+
 		trs = trip.removeTripSightseeing(trs);
 		em.remove(trs);
-
+		em.getTransaction().commit();
 		em.close();
 		emf.close();
 
@@ -441,13 +427,11 @@ public class Dac implements IDac, ICSC {
 		TripSightseeing tsi = new TripSightseeing();
 		tsi.setSightseeing(sight);
 		tsi.setTrip(trip);
-		
-		
-		
-		  em.getTransaction().begin();
-	        em.persist(tsi);
-	        em.getTransaction().commit();
-		//em.persist(tsi);
+
+		em.getTransaction().begin();
+		em.persist(tsi);
+		em.getTransaction().commit();
+		// em.persist(tsi);
 		int ans = tsi.getIdtripSightseeing();
 		em.close();
 		emf.close();
@@ -468,20 +452,20 @@ public class Dac implements IDac, ICSC {
 	}
 
 	public int setpicsForSighttrip(String addr, String idtrsig) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");	
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int id = Integer.parseInt(idtrsig);
 		TripSightseeing trs = em.find(TripSightseeing.class, id);
 		Pic p = new Pic();
 		p.setPicsAddr(addr);
 		p.setTripSightseeing(trs);
-		   em.getTransaction().begin();
-		   
-		   em.persist(p);
-	        em.getTransaction().commit();
-		  em.close();
-	        emf.close();
-		int ans =  p.getIdpics();
+		em.getTransaction().begin();
+
+		em.persist(p);
+		em.getTransaction().commit();
+		em.close();
+		emf.close();
+		int ans = p.getIdpics();
 		return ans;
 	}
 
@@ -501,8 +485,14 @@ public class Dac implements IDac, ICSC {
 		EntityManager em = emf.createEntityManager();
 		int i = Integer.parseInt(idpic);
 		Pic p = em.find(Pic.class, i);
+
+		em.getTransaction().begin();
+		// em.remove(employee);
+
 		p.setTripSightseeing(null);
 		em.remove(p);
+
+		em.getTransaction().commit();
 		em.close();
 		emf.close();
 	}
@@ -595,7 +585,11 @@ public class Dac implements IDac, ICSC {
 		EntityManager em = emf.createEntityManager();
 		int i = Integer.parseInt(travid);
 		Traveler t = em.find(Traveler.class, i);
+
+		em.getTransaction().begin();
+
 		em.remove(t);
+		em.getTransaction().commit();
 		em.close();
 		emf.close();
 		// return t + " removed ";
@@ -609,25 +603,21 @@ public class Dac implements IDac, ICSC {
 		Sightseeing sight = new Sightseeing();
 		sight.setCity(t.getCity());
 		sight.setSightSeeingsName(sightname);
-		
-		
-   em.getTransaction().begin();
-		   
-		   em.persist(sight);
-	        em.getTransaction().commit();
-	
+
+		em.getTransaction().begin();
+
+		em.persist(sight);
+		em.getTransaction().commit();
+
 		TripSightseeing tss = new TripSightseeing();
 		tss.setSightseeing(sight);
 		tss.setTrip(t);
-		
-		
-		 em.getTransaction().begin();
-		   
-		   em.persist(tss);
-	        em.getTransaction().commit();
-	
-	
-	
+
+		em.getTransaction().begin();
+
+		em.persist(tss);
+		em.getTransaction().commit();
+
 		em.close();
 		emf.close();
 		return tss.getIdtripSightseeing();
@@ -673,6 +663,9 @@ public class Dac implements IDac, ICSC {
 		int i2 = Integer.parseInt(trsid);
 		TripSightseeing tmp = em.find(TripSightseeing.class, i2);
 		Sightseeing todel = tmp.getSightseeing();
+
+		em.getTransaction().begin();
+
 		tmp.setSightseeing(null);
 
 		tmp.setTrip(null);
@@ -682,7 +675,7 @@ public class Dac implements IDac, ICSC {
 		if (todel.getTripSightseeings().size() <= 1)
 			todel.setTripSightseeings(null);
 		em.remove(todel);
-
+		em.getTransaction().commit();
 		em.close();
 		emf.close();
 		return "deleted sucssefully/unsucssefuly";
@@ -695,11 +688,13 @@ public class Dac implements IDac, ICSC {
 		EntityManager em = emf.createEntityManager();
 		int i2 = Integer.parseInt(ids);
 		Sightseeing todel = em.find(Sightseeing.class, i2);
+		em.getTransaction().begin();
 		todel.setCity(null);
 		todel.setSightSeeingsName(null);
 		if (todel.getTripSightseeings().size() <= 1)
 			todel.setTripSightseeings(null);
 		em.remove(todel);
+		em.getTransaction().commit();
 		em.close();
 		emf.close();
 	}

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Imgg.Stac;
+import Imgg.StacInv;
 import abc.da.Dac;
 import abc.da.IDac;
 import model3.City;
@@ -32,6 +33,7 @@ public class EditorController extends HttpServlet {
 	IDac TBL;
 	// @EJB(beanName = "bla")
 	Stac stc;
+	StacInv stci;
 	private static final String EdtPage = "/tripEditor.jsp";
 
 	/**
@@ -42,6 +44,7 @@ public class EditorController extends HttpServlet {
 		// TODO Auto-generated constructor stub
 		TBL = new Dac();
 		stc=new Stac();
+		stci=new StacInv();
 	}
 
 	/**
@@ -78,6 +81,7 @@ public class EditorController extends HttpServlet {
 			List<Sightseeing> news = TBL.newTripCitySights(c.getIdcities() + "", Tripid);
 			session1.setAttribute("news", news);
 			session1.setAttribute("td",stc);
+			session1.setAttribute("tdi", stci);
 			forward= EdtPage + "?redir=false";
 		}
 		session1.removeAttribute("redir");

@@ -5,6 +5,7 @@
 <%@page import="java.io.*"%>
 <%@page import="java.util.*"%>
 <%@page import="Imgg.Stac"%>
+<%@page import="Imgg.*"%>
 <%@page import="Interf.*"%>
 <%@page import="model3.TripSightseeing"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -31,26 +32,30 @@
 <link rel="stylesheet" href="./css/FileOne.css">
 <style>
 #pics {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
 }
 
 #pics td, #customers th {
-    border: 1px solid #ddd;
-    padding: 8px;
+	border: 1px solid #ddd;
+	padding: 8px;
 }
 
-#pics tr:nth-child(even){background-color: #f2f2f2;}
+#pics tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
 
-#pics tr:hover {background-color: #ddd;}
+#pics tr:hover {
+	background-color: #ddd;
+}
 
 #pics th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #4CAF50;
-    color: white;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #4CAF50;
+	color: white;
 }
 </style>
 </head>
@@ -191,7 +196,9 @@
 							value="AddItem">add picture</button>
 						<INPUT type="submit" name="todo" value="ListItems"
 							class="btn btn-default btn-link"> <INPUT type="submit"
-							name="todo" value="ClearList" class="btn btn-default btn-link">
+							name="todo" value="ClearList" class="btn btn-default btn-link"><INPUT
+							type="submit" name="todo" value="listpicsforsite"
+							class="btn btn-default btn-link">
 					</h4>
 
 					<br>
@@ -201,65 +208,104 @@
 							<strong>Picture added:</strong>
 						</div>
 						<div class="col-sm-7">
-<c:if test="${stp eq 2}">
-							<%
-								String action = request.getParameter("todo");
-													Stac td = (Stac) session.getAttribute("td");
-													if (td == null) {
-														try {
-														    td =new Stac();
-															session.setAttribute("td", td);
-														} catch (Exception ex) {
-															ex.printStackTrace();
-														}
-													}
-													if (action != null) {
-														if (action.equals("AddItem")) {
-															String item = request.getParameter("item");
-															if (!item.equals("")) {
-																td.addItem(item, (TripSightseeing) session.getAttribute("worksight"));
-																/* 	out.println("item " + item + " added"); */
-																request.setAttribute("scrollTo", "addpics");
+							<c:if test="${stp eq 2}">
+								<%
+									String action = request.getParameter("todo");
+										Stac td = (Stac) session.getAttribute("td");
+										if (td == null) {
+											try {
+												td = new Stac();
+												session.setAttribute("td", td);
+											} catch (Exception ex) {
+												ex.printStackTrace();
+											}
+										}
+										
+										StacInv tdi = (StacInv) session.getAttribute("tdi");
+										if (tdi == null) {
+											try {
+												tdi = new StacInv();
+												session.setAttribute("tdi", tdi);
+											} catch (Exception ex) {
+												ex.printStackTrace();
+											}
+											}
+										if (action != null) {
+											if (action.equals("AddItem")) {
+												String item = request.getParameter("item");
+												if (!item.equals("")) {
+													td.addItem(item, (TripSightseeing) session.getAttribute("worksight"));
+													/* 	out.println("item " + item + " added"); */
+													request.setAttribute("scrollTo", "addpics");
 
-															}
-														} else if (action.equals("ListItems")) {
-															Vector<Map> items = td.listItems();
-															/* 		out.println("items: "); */
-															out.println("<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>");
-															for (int x = 0; x != items.size(); x++) {
-																String addrspic = (String) items.elementAt(x).get("addr");
-																out.println("<tr><td>" + (x + 1) + ".</td><td> " + items.elementAt(x).get("trs") + "</td><td> "
-																		+ (addrspic.length() >= 40
-																				? /* "..." + */ addrspic.substring(addrspic.length() - 40)
-																				: addrspic));
-																out.print("</td><td><a href=tripEditor.jsp?todo=remove&itemnum=" + x + ">remove</a></td></tr>");
-																request.setAttribute("scrollTo", "addpics");
-															}out.print("</table>");
-															request.setAttribute("scrollTo", "addpics");
+												}
+											} else if (action.equals("ListItems")) {
+												Vector<Map> items = td.listItems();
+												/* 		out.println("items: "); */
+												out.println(
+														"<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>");
+												for (int x = 0; x != items.size(); x++) {
+													String addrspic = (String) items.elementAt(x).get("addr");
+													out.println(
+															"<tr><td>" + (x + 1) + ".</td><td> " + items.elementAt(x).get("trs") + "</td><td> "
+																	+ (addrspic.length() >= 40
+																			? /* "..." + */ addrspic.substring(addrspic.length() - 40)
+																			: addrspic));
+													out.print("</td><td><a href=tripEditor.jsp?todo=remove&itemnum=" + x
+															+ ">remove</a></td></tr>");
+													request.setAttribute("scrollTo", "addpics");
+												}
+												out.print("</table>");
+												request.setAttribute("scrollTo", "addpics");
 
-														} else if ("ClearList".equals(action)) {
-															td.clearItems();
-															out.println("items Cleared");
-															request.setAttribute("scrollTo", "addpics");
+											} else if ("ClearList".equals(action)) {
+												td.clearItems();
+												out.println("items Cleared");
+												request.setAttribute("scrollTo", "addpics");
 
-														} else if ("todb".equals(action)) {
-															RequestDispatcher rd = request.getRequestDispatcher("/EditorController");
-															//request.setAttribute("td", td);
-															request.setAttribute("action", action);
-															request.setAttribute("td1",td);															/*    request.setAttribute("trp", (String)(session.getAttribute("tri")+""));
-															*/ //session.removeAttribute("todo");
-															rd.forward(request, response);
-														} else if ("remove".equals(action)) {
-															String item = request.getParameter("itemnum");
-															td.removeItem(item);
-															request.setAttribute("scrollTo", "addpics");
+											} else if ("todb".equals(action)) {
+												RequestDispatcher rd = request.getRequestDispatcher("/EditorController");
+												//request.setAttribute("td", td);
+												request.setAttribute("action", action);
+												request.setAttribute("td1", td); /*    request.setAttribute("trp", (String)(session.getAttribute("tri")+""));
+																					*/ //session.removeAttribute("todo");
+												rd.forward(request, response);
+											} else if ("remove".equals(action)) {
+												String item = request.getParameter("itemnum");
+												td.removeItem(item);
+												request.setAttribute("scrollTo", "addpics");
 
-														}
+											} else if ("listpicsforsite".equals(action)) {
+												
+												
+												Vector<Map> items = tdi.listItems(
+														((TripSightseeing) (session.getAttribute("worksight"))).getIdtripSightseeing());
+												out.println(
+														"<Table id='pics'><thead><tr><th>n.</TH><TH>Trip Sight</TH><TH>Pic addr ends with</TH><th>remove?</th></tr></thead>");
+												for (int x = 0; x != items.size(); x++) {
+													String addrspic = (String) items.elementAt(x).get("addr");
+													out.println(
+															"<tr><td>" + (x + 1) + ".</td><td> " + items.elementAt(x).get("trs") + "</td><td> "
+																	+ (addrspic.length() >= 40
+																			? /* "..." + */ addrspic.substring(addrspic.length() - 40)
+																			: addrspic));
+													out.print("</td><td><a href=tripEditor.jsp?todo=removeI&itemnum=" + x
+															+ ">remove</a></td></tr>");
+													request.setAttribute("scrollTo", "addpics");
+												}
+												out.print("</table>");
+												request.setAttribute("scrollTo", "addpics");
+											}
+											
+											else if ("removeI".equals(action)) {
+												String item = request.getParameter("itemnum");
+												tdi.removeItem(item);
+												request.setAttribute("scrollTo", "addpics");
+										}
+										}
+								%>
 
-													}
-							%>
-
-</c:if>
+							</c:if>
 
 						</div>
 						<div class="col-sm-2">
