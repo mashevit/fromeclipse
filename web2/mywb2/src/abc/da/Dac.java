@@ -698,4 +698,28 @@ public class Dac implements IDac, ICSC, InvI {
 		em.close();
 		emf.close();
 	}
+	@Override
+	public int numpicsbycity(String cityid) {
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+		EntityManager em = emf.createEntityManager();
+		int id = Integer.parseInt(cityid);
+		String statement = "Select count(p) FROM Pic p Join p.tripSightseeing s Join s.trip t join t.city c WHERE c.idcities =:i";
+		Query q = em.createQuery(statement).setParameter("i", id);
+		@SuppressWarnings("unchecked")
+		int l = Math.toIntExact((long) q.getSingleResult());
+		em.close();
+		emf.close();
+		return l;
+		
+	/*	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+		EntityManager em = emf.createEntityManager();
+		int id = Integer.parseInt(idSight);
+		String statement = "Select p FROM Pic p Join p.tripSightseeing a where a.idtripSightseeing =:i";
+		Query q = em.createQuery(statement).setParameter("i", id);
+		List<Pic> ans = q.getResultList();
+		em.close();
+		emf.close();
+		return ans;*/
+	}
 }

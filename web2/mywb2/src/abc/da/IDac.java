@@ -92,4 +92,6 @@ public interface IDac {
 
 	List<Trip> TriplOAsc();
 
+	int numpicsbycity(String cityid);
+
 }
