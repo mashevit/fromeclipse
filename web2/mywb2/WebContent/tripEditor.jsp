@@ -28,8 +28,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" href="./css/FileOne.css">
+	<script
+	src="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/rloader/rloader1.5.4_min.js"></script>
+<!-- <link rel="stylesheet" href="./css/FileOne.css"> -->
 <style>
 #pics {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -624,7 +625,7 @@ Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
 
 	<script>
 		$(document).ready(
-				function() {
+				function() {$.rloader([ {src:'./css/FileOne.css'} ]);
 					// Add smooth scrolling to all links in navbar + footer link
 					$(".navbar a, footer a[href='#myPage']").on('click',
 							function(event) {

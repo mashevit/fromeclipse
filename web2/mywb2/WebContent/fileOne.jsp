@@ -15,12 +15,16 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="FileOne.css">
+	<script
+	src="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/rloader/rloader1.5.4_min.js"></script>
+
+<!-- <link rel="stylesheet" type="text/css" href="FileOne.css"> -->
 </head>
 
 
 <body id="myPage" data-spy="scroll" data-target=".navbar"
 	data-offset="60">
+
 	<c:if test="${empty ti}"><jsp:forward
 			page="/CSC?myaction=listOfusers&init=true"></jsp:forward></c:if>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -422,7 +426,7 @@
 	</footer>
 	<script>
 		$(document).ready(
-				function() {
+				function() {$.rloader([ {src:'./css/FileOne.css'} ]);
 					// Add smooth scrolling to all links in navbar + footer link
 					$(".navbar a, footer a[href='#myPage']").on('click',
 							function(event) {
