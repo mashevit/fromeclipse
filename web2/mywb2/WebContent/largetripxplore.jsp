@@ -165,7 +165,7 @@
 	</footer>
 	<script>
 		$(document).ready(
-				function() {/* $.rloader([ {src:'./css/FileOne.css'} ]); */
+				function() { $.rloader([ {src:'./css/FileOne.css'} ]); $.rloader({defaultcache:false});
 					// Add smooth scrolling to all links in navbar + footer link
 					$(".navbar a, footer a[href='#myPage']").on('click',
 							function(event) {
