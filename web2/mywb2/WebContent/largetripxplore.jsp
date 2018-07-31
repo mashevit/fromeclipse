@@ -13,13 +13,13 @@
 <link href="https://fonts.googleapis.com/css?family=Lato"
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	href="./css/bootstrap.min.css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	src="./js/jquery.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	src="./js/bootstrap.min.js"></script>
 	<script
-	src="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/rloader/rloader1.5.4_min.js"></script>
+	src="./js/rloader1.5.4_min.js"></script>
 <link rel="stylesheet" href="./css/FileOne.css">
 
 </head>
