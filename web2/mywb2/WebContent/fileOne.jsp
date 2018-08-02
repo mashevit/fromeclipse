@@ -135,7 +135,7 @@
 
 					<label for="Inputselect">city</label> <select class="form-control"
 						id="city" name="city" required>
-						<option value="-1">Select city</option>
+						<!-- <option value="-1">Select city</option> -->
 						<c:forEach items="${cities}" var="citys">
 							<option value="${citys.idcities}">
 		${citys.cityName}
