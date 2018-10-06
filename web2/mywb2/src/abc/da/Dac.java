@@ -18,17 +18,17 @@ import model3.TripSightseeing;
 public class Dac implements IDac, ICSC, InvI {
 
 	// EntityManager em;
-	EntityManagerFactory emf;
+	EntityManagerFactory emf= Persistence.createEntityManagerFactory("mywb2");
 
-	public Dac() {
+/*	public Dac() {
 		// TODO Auto-generated constructor stub
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		// em = emf.createEntityManager();
-	}
+	}*/
 
 	public int createTrip(String cityi, Date date, String traveleri, int numdays, int moneyspent, String hotel,
 			String Sightseeingi, int transit) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		Trip trip = new Trip();
 		int i = Integer.parseInt(cityi);
@@ -62,13 +62,13 @@ public class Dac implements IDac, ICSC, InvI {
 		}
 
 		em.close();
-		emf.close();
+	//	emf.close();
 		return trip.getIdtrip();
 	}
 
 	public int createTripStrings(String cityi, Date date, String traveleri, String numdays, String moneyspent,
 			String hotel, String transit) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		Trip trip = new Trip();
 		int i = Integer.parseInt(cityi);
@@ -90,12 +90,12 @@ public class Dac implements IDac, ICSC, InvI {
 		// em.persist();
 
 		em.close();
-		emf.close();
+	//	emf.close();
 		return trip.getIdtrip();
 	}
 
 	public int createTraveler(String name, Date birthDate) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		Traveler travelr = new Traveler();
 		travelr.setTravelerName(name);
@@ -107,12 +107,12 @@ public class Dac implements IDac, ICSC, InvI {
 		// em.persist();
 
 		em.close();
-		emf.close();
+		//emf.close();
 		return travelr.getIdtraveler();
 	}
 
 	public int addCity(String cityName) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		City city = new City();
 		String statement = "SELECT c FROM City c WHERE c.cityName= :cn";
@@ -134,12 +134,12 @@ public class Dac implements IDac, ICSC, InvI {
 		// em.persist(city);
 
 		em.close();
-		emf.close();
+	//	emf.close();
 		return city.getIdcities();
 	}
 
 	public int createSight(String name, City city) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		Sightseeing sight = new Sightseeing();
 		sight.setSightSeeingsName(name);
@@ -151,13 +151,13 @@ public class Dac implements IDac, ICSC, InvI {
 		// em.persist(sight);
 
 		em.close();
-		emf.close();
+	//	emf.close();
 		return sight.getIdSightSeeings();
 	}
 
 	// ?
 	public int addSightTrip(Sightseeing sightseeing) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		TripSightseeing tS = new TripSightseeing();
 		tS.setSightseeing(sightseeing);
@@ -169,23 +169,23 @@ public class Dac implements IDac, ICSC, InvI {
 		// em.persist(tS);
 
 		em.close();
-		emf.close();
+	//	emf.close();
 		return tS.getIdtripSightseeing();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<City> getAllCities() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		Query query = em.createNamedQuery("City.findAll");
 		List<City> ans = query.getResultList();
 		em.close();
-		emf.close();
+	//	emf.close();
 		return ans;
 	}
 
 	public String removeCity(String ist) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int i = Integer.parseInt(ist);
 		City city = em.find(City.class, i);
@@ -193,25 +193,25 @@ public class Dac implements IDac, ICSC, InvI {
 		em.remove(city);
 		em.getTransaction().commit();
 		em.close();
-		emf.close();
+	//	emf.close();
 		return i + "  city removed ";
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Traveler> getTravellers() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		Query query = em.createNamedQuery("Traveler.findAll");
 		List<Traveler> ans = query.getResultList();
 
 		em.close();
-		emf.close();
+	///	emf.close();
 
 		return ans;
 	}
 
 	public int addTraveller(String name, Date BirthD) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		Traveler traveler = new Traveler();
 		traveler.setTravelerName(name);
@@ -222,13 +222,13 @@ public class Dac implements IDac, ICSC, InvI {
 		em.getTransaction().commit();
 		// em.persist(traveler);
 		em.close();
-		emf.close();
+	//	emf.close();
 		return traveler.getIdtraveler();
 
 	}
 
 	public int addSight(String name, City city) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		Sightseeing sight = new Sightseeing();
 		sight.setCity(city);
@@ -239,13 +239,13 @@ public class Dac implements IDac, ICSC, InvI {
 		em.getTransaction().commit();
 		// em.persist(sight);
 		em.close();
-		emf.close();
+	//	emf.close();
 		return sight.getIdSightSeeings();
 
 	}
 
 	public int addSighti(String name, String ist) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int i = Integer.parseInt(ist);
 		Sightseeing sight = new Sightseeing();
@@ -259,14 +259,14 @@ public class Dac implements IDac, ICSC, InvI {
 		// em.persist(sight);
 
 		em.close();
-		emf.close();
+	//	emf.close();
 
 		return sight.getIdSightSeeings();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Sightseeing> sightsbycity(String cityidstr) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int i = Integer.parseInt(cityidstr);
 		// City city = em.find(City.class, i);
@@ -274,37 +274,37 @@ public class Dac implements IDac, ICSC, InvI {
 		Query query = em.createQuery(statement).setParameter("id", i);
 		List<Sightseeing> ans = query.getResultList();
 		em.close();
-		emf.close();
+	//	emf.close();
 
 		return ans;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Trip> Tripl() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		Query query = em.createNamedQuery("Trip.findAll");
 		List<Trip> ans = query.getResultList();
 		em.close();
-		emf.close();
+	//	emf.close();
 
 		return ans;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Trip> TriplOAsc() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		Query query = em.createQuery("SELECT t FROM Trip t ORDER BY t.tripDate ASC");
 		List<Trip> ans = query.getResultList();
 		em.close();
-		emf.close();
+	//	emf.close();
 
 		return ans;
 	}
 
 	public String getTripCityName(String idt) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int id = Integer.parseInt(idt);
 		String statement = "SELECT c FROM Trip t JOIN t.City c WHERE t.idtrip= :i";
@@ -313,14 +313,14 @@ public class Dac implements IDac, ICSC, InvI {
 		List<City> c = q.getResultList();
 
 		em.close();
-		emf.close();
+	//	emf.close();
 
 		return c.get(0).getCityName();
 	}
 
 	@Override
 	public City getCitybyTrip(String idt) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int id = Integer.parseInt(idt);
 		String statement = "SELECT c FROM Trip t JOIN t.city c WHERE t.idtrip= :i";
@@ -329,13 +329,13 @@ public class Dac implements IDac, ICSC, InvI {
 		List<City> c = q.getResultList();
 
 		em.close();
-		emf.close();
+	//	emf.close();
 
 		return c.get(0);
 	}
 
 	public List<Sightseeing> SightsforTrip(String tri) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int id = Integer.parseInt(tri);
 		String statement = "Select s FROM Trip t JOIN t.tripSightseeings ts JOIN ts.sightseeing s WHERE t.idtrip= :i";
@@ -344,14 +344,14 @@ public class Dac implements IDac, ICSC, InvI {
 		List<Sightseeing> l = q.getResultList();
 
 		em.close();
-		emf.close();
+	//	emf.close();
 
 		return l;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Sightseeing> newTripCitySights(String ci, String ti) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int id = Integer.parseInt(ti);
 		int ic = Integer.parseInt(ci);
@@ -359,13 +359,13 @@ public class Dac implements IDac, ICSC, InvI {
 		Query q = em.createQuery(statement).setParameter("ic", ic).setParameter("id", id);
 		List<Sightseeing> ans = q.getResultList();
 		em.close();
-		emf.close();
+	//	emf.close();
 
 		return ans;
 	}
 
 	public String removeSightFromTrip(String si, String ti) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int id = Integer.parseInt(ti);
 		int is = Integer.parseInt(si);
@@ -377,14 +377,14 @@ public class Dac implements IDac, ICSC, InvI {
 		em.remove(trs);
 		em.getTransaction().commit();
 		em.close();
-		emf.close();
+	///	emf.close();
 
 		return "  Sightseeing " + si + " was renoved from trip" + ti + "and deleted";
 
 	}
 
 	public int removeSightFromTripint(String si, String ti) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int id = Integer.parseInt(ti);
 		int is = Integer.parseInt(si);
@@ -397,13 +397,13 @@ public class Dac implements IDac, ICSC, InvI {
 		em.remove(trs);
 		em.getTransaction().commit();
 		em.close();
-		emf.close();
+	//	emf.close();
 
 		return i;
 	}
 
 	public List<TripSightseeing> SightseeingforTrip(String tri) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int id = Integer.parseInt(tri);
 		String statement = "Select s FROM Trip t JOIN t.tripSightseeings s WHERE t.idtrip= :i";
@@ -412,13 +412,13 @@ public class Dac implements IDac, ICSC, InvI {
 		List<TripSightseeing> l = q.getResultList();
 
 		em.close();
-		emf.close();
+	//	emf.close();
 
 		return l;
 	}
 
 	public int addsighttotrip(String sigind, String tripind) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int id = Integer.parseInt(tripind);
 		int is = Integer.parseInt(sigind);
@@ -434,25 +434,25 @@ public class Dac implements IDac, ICSC, InvI {
 		// em.persist(tsi);
 		int ans = tsi.getIdtripSightseeing();
 		em.close();
-		emf.close();
+	//	emf.close();
 		return ans;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Pic> picsForSightTrip(String idSight) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int id = Integer.parseInt(idSight);
 		String statement = "Select p FROM Pic p Join p.tripSightseeing a where a.idtripSightseeing =:i";
 		Query q = em.createQuery(statement).setParameter("i", id);
 		List<Pic> ans = q.getResultList();
 		em.close();
-		emf.close();
+	//	emf.close();
 		return ans;
 	}
 
 	public int setpicsForSighttrip(String addr, String idtrsig) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int id = Integer.parseInt(idtrsig);
 		TripSightseeing trs = em.find(TripSightseeing.class, id);
@@ -464,24 +464,24 @@ public class Dac implements IDac, ICSC, InvI {
 		em.persist(p);
 		em.getTransaction().commit();
 		em.close();
-		emf.close();
+	//	emf.close();
 		int ans = p.getIdpics();
 		return ans;
 	}
 
 	public Pic picbyid(String ids) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	///	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int i = Integer.parseInt(ids);
 		Pic p = em.find(Pic.class, i);
 		em.close();
-		emf.close();
+	//	emf.close();
 		return p;
 
 	}
 
 	public void deletPic(String idpic) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int i = Integer.parseInt(idpic);
 		Pic p = em.find(Pic.class, i);
@@ -494,12 +494,12 @@ public class Dac implements IDac, ICSC, InvI {
 
 		em.getTransaction().commit();
 		em.close();
-		emf.close();
+	//	emf.close();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Trip> GetTripsByCity(String cityidstr) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int i = Integer.parseInt(cityidstr);
 		// City city = em.find(City.class, i);
@@ -508,13 +508,13 @@ public class Dac implements IDac, ICSC, InvI {
 		List<Trip> ans = query.getResultList();
 
 		em.close();
-		emf.close();
+	//	emf.close();
 
 		return ans;
 	}
 
 	public List<Pic> PicbyTrip(String tripid) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int id = Integer.parseInt(tripid);
 		String statement = "Select p FROM Pic p Join p.tripSightseeing s Join s.trip t WHERE t.idtrip =:i";
@@ -522,66 +522,66 @@ public class Dac implements IDac, ICSC, InvI {
 		@SuppressWarnings("unchecked")
 		List<Pic> l = q.getResultList();
 		em.close();
-		emf.close();
+	//	emf.close();
 		return l;
 
 	}
 
 	public List<Trip> get3uniq() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		String q1 = "SELECT t FROM Trip t GROUP BY t.city ORDER BY COUNT(t.city) Asc";
 		Query q = em.createQuery(q1).setMaxResults(3);
 		@SuppressWarnings("unchecked")
 		List<Trip> l = q.getResultList();
 		em.close();
-		emf.close();
+	//	emf.close();
 
 		return l;
 
 	}
 
 	public List<City> get3common() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		String q1 = "SELECT a FROM Trip t Join t.city a GROUP BY a ORDER BY COUNT(a) Desc";
 		Query q = em.createQuery(q1).setMaxResults(3);
 		@SuppressWarnings("unchecked")
 		List<City> l = q.getResultList();
 		em.close();
-		emf.close();
+	//	emf.close();
 
 		return l;
 
 	}
 
 	public List<Pic> get3pics() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		String q1 = "SELECT a FROM Pic a GROUP BY a.tripSightseeing ORDER BY COUNT(a.tripSightseeing) Desc";
 		Query q = em.createQuery(q1).setMaxResults(3);
 		@SuppressWarnings("unchecked")
 		List<Pic> l = q.getResultList();
 		em.close();
-		emf.close();
+	//	emf.close();
 
 		return l;
 
 	}
 
 	public Traveler getTravelerbyId(String id) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int i = Integer.parseInt(id);
 		Traveler t = em.find(Traveler.class, i);
 		em.close();
-		emf.close();
+	//	emf.close();
 		return t;
 
 	}
 
 	public void removetraveller(String travid) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int i = Integer.parseInt(travid);
 		Traveler t = em.find(Traveler.class, i);
@@ -591,12 +591,12 @@ public class Dac implements IDac, ICSC, InvI {
 		em.remove(t);
 		em.getTransaction().commit();
 		em.close();
-		emf.close();
+	//	emf.close();
 		// return t + " removed ";
 	}
 
 	public int addSightStr(String tripid, String sightname) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int i = Integer.parseInt(tripid);
 		Trip t = em.find(Trip.class, i);
@@ -619,7 +619,7 @@ public class Dac implements IDac, ICSC, InvI {
 		em.getTransaction().commit();
 
 		em.close();
-		emf.close();
+	//	emf.close();
 		return tss.getIdtripSightseeing();
 	}
 
@@ -637,27 +637,27 @@ public class Dac implements IDac, ICSC, InvI {
 	//
 	// }
 	public Sightseeing getsightbyid(String ids) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int i = Integer.parseInt(ids);
 		Sightseeing s = em.find(Sightseeing.class, i);
 		em.close();
-		emf.close();
+	//	emf.close();
 		return s;
 	}
 
 	public TripSightseeing getTrsightbyid(String ids) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int i = Integer.parseInt(ids);
 		TripSightseeing s = em.find(TripSightseeing.class, i);
 		em.close();
-		emf.close();
+	//	emf.close();
 		return s;
 	}
 
 	public String removeTSightseeingFromCity(String trsid) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 
 		int i2 = Integer.parseInt(trsid);
@@ -677,14 +677,14 @@ public class Dac implements IDac, ICSC, InvI {
 		em.remove(todel);
 		em.getTransaction().commit();
 		em.close();
-		emf.close();
+	//	emf.close();
 		return "deleted sucssefully/unsucssefuly";
 		// em.find(Sightseeing.class, tmp.);
 		// Sightseeing todel=
 	}
 
 	public void removeSightUndefined(String ids) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int i2 = Integer.parseInt(ids);
 		Sightseeing todel = em.find(Sightseeing.class, i2);
@@ -696,12 +696,12 @@ public class Dac implements IDac, ICSC, InvI {
 		em.remove(todel);
 		em.getTransaction().commit();
 		em.close();
-		emf.close();
+	//	emf.close();
 	}
 	@Override
 	public int numpicsbycity(String cityid) {
 		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
+	//	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
 		EntityManager em = emf.createEntityManager();
 		int id = Integer.parseInt(cityid);
 		String statement = "Select count(p) FROM Pic p Join p.tripSightseeing s Join s.trip t join t.city c WHERE c.idcities =:i";
@@ -709,7 +709,7 @@ public class Dac implements IDac, ICSC, InvI {
 		@SuppressWarnings("unchecked")
 		int l = Math.toIntExact((long) q.getSingleResult());
 		em.close();
-		emf.close();
+	//	emf.close();
 		return l;
 		
 	/*	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mywb2");
